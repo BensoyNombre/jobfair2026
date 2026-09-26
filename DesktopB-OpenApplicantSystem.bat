@@ -20,6 +20,15 @@ if not defined SERVER_HOST (
 )
 
 set "APP_URL=http://%SERVER_HOST%%APP_PATH%"
+set "APP_EXE=%~dp0dist\ApplicantSystem.exe"
+
+if not exist "%APP_EXE%" (
+    echo.
+    echo ApplicantSystem.exe was not found in the dist folder.
+    echo Copy the published dist folder beside this launcher.
+    pause
+    exit /b 1
+)
 
 echo Checking %APP_URL% ...
 curl.exe --silent --head --fail --max-time 5 "%APP_URL%" >nul 2>&1
@@ -32,12 +41,5 @@ if errorlevel 1 (
     exit /b 1
 )
 
-set "EDGE_EXE=%ProgramFiles(x86)%\Microsoft\Edge\Application\msedge.exe"
-if not exist "%EDGE_EXE%" set "EDGE_EXE=%ProgramFiles%\Microsoft\Edge\Application\msedge.exe"
-
-if exist "%EDGE_EXE%" (
-    start "Applicant System" "%EDGE_EXE%" --app="%APP_URL%" --start-maximized
-) else (
-    start "Applicant System" "%APP_URL%"
-)
+start "Applicant System" "%APP_EXE%" "%APP_URL%"
 endlocal

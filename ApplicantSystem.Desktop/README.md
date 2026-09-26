@@ -16,7 +16,8 @@ Run `build-exe.bat` from this folder. The published executable is written to `di
 
 1. On Desktop A, start Apache and MySQL in XAMPP.
 2. Run `ApplicantSystem.bat` on Desktop A. It checks the server and displays Desktop A's LAN address.
-3. On Desktop B, run `DesktopB-OpenApplicantSystem.bat` and enter Desktop A's IPv4 address, for example `192.168.1.46`.
-4. Keep Desktop A powered on and connected to the same network while Desktop B is using the system.
+3. Copy the published `dist` folder and `DesktopB-OpenApplicantSystem.bat` to Desktop B.
+4. On Desktop B, run `DesktopB-OpenApplicantSystem.bat` and enter Desktop A's IPv4 address, for example `192.168.1.46`. The launcher starts the desktop executable and remembers the address on that device.
+5. Keep Desktop A powered on and connected to the same network while other devices are using the system.
 
-The shared address is `http://<Desktop-A-IP>/applicant_system/index.php`. If Desktop B cannot connect, allow Apache through Windows Firewall on Desktop A and confirm that both computers are on the same network.
+The shared address is `http://<Desktop-A-IP>/applicant_system/index.php`. On Desktop A, set the trusted Wi-Fi or Ethernet network profile to **Private**, then right-click `Allow-ApplicantSystem-LAN.bat` and choose **Run as administrator**. This adds a firewall rule for Apache on Private networks only. Windows devices can also run `ApplicantSystem.exe` directly and enter Desktop A's IPv4 address when prompted. Phones, tablets, and other non-Windows devices can open the shared address in a browser; they cannot run a Windows `.exe`.
